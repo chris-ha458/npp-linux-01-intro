@@ -63,9 +63,9 @@ if [ $? -ne 0 ]; then
 fi
 
 
-# Change mac addresses 
-chmod +x ./provided/change_mac_addrs.sh
-./provided/change_mac_addrs.sh
+# Change mac addresses with elevated permissions
+sudo chmod +x ./provided/change_mac_addrs.sh
+sudo ./provided/change_mac_addrs.sh
 
 
 # Execute Student provided script to configure per instructions of the lab
@@ -115,7 +115,8 @@ docker exec clab-lab1-part1-host1 /lab-folder/onepkt.py host1 host3 test-pkt4
 # host4 to all
 docker exec clab-lab1-part1-host4 /lab-folder/onepkt.py host4 all_hosts test-pkt5
 
-
+# wait before killing processes to allow time for packets to be captured
+sleep 5
 
 # Stop captures
 kill $pid1
